@@ -1,10 +1,10 @@
 cd resources/
 
-sqlite3 -header -csv holdings.db  "select distinct holder_cik as '~id','Holder'as label, holder_name from holdings;" > holder_vertices.csv
+sqlite3 -header -csv holdings.db  "select distinct holder_cik as '~id','Holder'as '~label', holder_name from holdings;" > holder_vertices.csv
 
 sqlite3 -header -csv holdings.db  "
 select distinct cusip || '-'|| period_date  as '~id',
-       'Holding' as label,
+       'Holding' as '~label',
        sym,
        holding_name,
        sec_type,

@@ -1,5 +1,5 @@
 select distinct cusip || '-'|| period_date  as '~id',
-       'Holding' as label,
+       'Holding' as '~label',
        sym,
        holding_name,
        sec_type,

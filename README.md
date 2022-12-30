@@ -41,9 +41,9 @@ One way to model this data as a graph is to create vertices for `holders` and `h
 #### Lets create holder vertices. 
 
 ```
-sqlite3 -header -csv holdings.db  "select distinct holder_cik as '~id','Holder'as label, holder_name from holdings;" > holder_vertices.csv
+sqlite3 -header -csv holdings.db  "select distinct holder_cik as '~id','Holder'as '~label', holder_name from holdings;" > holder_vertices.csv
 ```
-| \~id    | label  | holder\_name                 |
+| \~id    | \~label  | holder\_name                 |
 |:--------|:-------|:-----------------------------|
 | 1067983 | Holder | BERKSHIRE HATHAWAY INC       |
 | 1350694 | Holder | Bridgewater Associates, LP   |
@@ -55,7 +55,7 @@ sqlite3 -header -csv holdings.db  "select distinct holder_cik as '~id','Holder'a
 ```
 sqlite3 -header -csv holdings.db  "
 select distinct cusip || '-'|| period_date  as '~id',
-       'Holding' as label,
+       'Holding' as '~label',
        sym,
        holding_name,
        sec_type,
@@ -70,7 +70,7 @@ order by sym desc;" > holding_vertices.csv
 
 Here we have defined holdings vertices with a few properties and data types
 
-| \~id               | label   | sym  | holding\_name   | sec\_type | period\_date:Date | market\_value:Double | quantity:Int |
+| \~id               | \~label   | sym  | holding\_name   | sec\_type | period\_date:Date | market\_value:Double | quantity:Int |
 |:-------------------|:--------|:-----|:----------------|:----------|:------------------|:---------------------|:-------------|
 | 149123101-20211231 | Holding | CAT  | CATERPILLAR INC | COM       | 2021-12-31        | 8499373000           | 41111408     |
 | 149123101-20220331 | Holding | CAT  | CATERPILLAR INC | COM       | 2022-03-31        | 9131971000           | 40983625     |
