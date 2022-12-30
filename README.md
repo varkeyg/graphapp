@@ -85,14 +85,14 @@ Here we have defined holdings vertices with a few properties and data types
 ```
 sqlite3 -header -csv holdings.db  "
 select distinct holder_cik ||cusip || '-'|| period_date as '~id',
-       'Holder-to_Holding-edge' as label,
+       'Holder-to_Holding-edge' as '~label',
        holder_cik as '~from',
        cusip || '-'|| period_date as '~to',
        date_filed
   from holdings;" > edges.csv
 ```
 
-| \~id                      | label                   | \~from  | \~to               | date\_filed |
+| \~id                      | \~label                   | \~from  | \~to               | date\_filed |
 |:--------------------------|:------------------------|:--------|:-------------------|:------------|
 | 106798300287Y109-20211231 | Holder-to\_Holding-edge | 1067983 | 00287Y109-20211231 | 20220214    |
 | 106798300507V109-20211231 | Holder-to\_Holding-edge | 1067983 | 00507V109-20211231 | 20220214    |
