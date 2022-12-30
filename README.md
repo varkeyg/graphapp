@@ -33,10 +33,12 @@ group by holder_name, holding_name, period_date
 | BERKSHIRE HATHAWAY INC | APPLE INC     | 20220930     | 894802319 |
 
 
+### Graph Modelling and converting the data to graph (gremlin) format. 
+
 One way to model this data as a graph is to create vertices for `holders` and `holdings` and connect them via `edges` for each `period`. Graph models need a unique identifier for a vertex called `id`. usually denoted as `~id` and a label to define the type of vertex. Here we can use `holder_cik` -> Holder's company identifier key defined by securities exchange commission (SEC). Holdings can be identified by sym (symbol). However, some stock holdings does not have symbols. Alternatively we can use CUSIP for the same purpose. Cusip is an alternate identifier. 
 
 
-Lets create holder vertices. 
+#### Lets create holder vertices. 
 
 ```
 sqlite3 -header -csv holdings.db  "select distinct holder_cik as '~id','Holder'as label, holder_name from holdings;" > holder_vertices.csv
@@ -49,7 +51,7 @@ sqlite3 -header -csv holdings.db  "select distinct holder_cik as '~id','Holder'a
 | 93751   | Holder | STATE STREET CORP            |
 
 
-Holdings vertices (for simplicity, lets create a vertex for each holding period. This can be further modelled more elegantly)
+#### Holdings vertices (for simplicity, lets create a vertex for each holding period. This can be further modelled more elegantly)
 ```
 sqlite3 -header -csv holdings.db  "
 select distinct cusip || '-'|| period_date  as '~id',
@@ -79,7 +81,7 @@ Here we have defined holdings vertices with a few properties and data types
 | 037833100-20220630 | Holding | AAPL | APPLE INC       | COM       | 2022-06-30        | 204979018000         | 1499261395   |
 | 037833100-20220930 | Holding | AAPL | APPLE INC       | COM       | 2022-09-30        | 205621196000         | 1487852369   |
 
-Edges between holder and holdings
+#### Edges between holder and holdings
 ```
 sqlite3 -header -csv holdings.db  "
 select distinct holder_cik ||cusip || '-'|| period_date as '~id',
@@ -102,9 +104,5 @@ select distinct holder_cik ||cusip || '-'|| period_date as '~id',
 ### Converting the csv data to Gremlin format
 Kelvin has provided a nice [utility](https://github.com/awslabs/amazon-neptune-tools/tree/master/csv-gremlin) to convert the data. The docker container downloads it also. 
 
+You can convert the csv files into gremlin statements by running:`generate_vert_edges.sh`
 
-```
-
-
-
-```

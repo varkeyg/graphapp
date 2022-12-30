@@ -25,3 +25,7 @@ select distinct holder_cik ||cusip || '-'|| period_date as '~id',
   from holdings;" > edges.csv
 
   python3 /home/graph-user/amazon-neptune-tools/csv-gremlin/csv-gremlin.py holder_vertices.csv > holder_vertices.gremlin
+  python3 /home/graph-user/amazon-neptune-tools/csv-gremlin/csv-gremlin.py holding_vertices.csv > holding_vertices.gremlin
+  python3 /home/graph-user/amazon-neptune-tools/csv-gremlin/csv-gremlin.py edges.csv > edges.gremlin
+
+  
