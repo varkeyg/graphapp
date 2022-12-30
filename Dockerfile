@@ -41,24 +41,14 @@ COPY java.sh .
 
 RUN ./java.sh
 
+ENV PATH=$PATH:~/tpop/pache-tinkerpop-gremlin-server-3.6.1/bin:~/tpop/apache-tinkerpop-gremlin-console-3.6.1/bin
+COPY tpop.sh .
+RUN ./tpop.sh
 
-ENV PATH="$PATH:/home/graph-user/graph_data/apache-tinkerpop-gremlin-server-3.6.1/bin:/home/graph-user/graph_data/apache-tinkerpop-gremlin-console-3.6.1/bin"
-
-WORKDIR "/home/graph-user/graph_data"
-RUN wget https://dlcdn.apache.org/tinkerpop/3.6.1/apache-tinkerpop-gremlin-server-3.6.1-bin.zip
-RUN wget https://dlcdn.apache.org/tinkerpop/3.6.1/apache-tinkerpop-gremlin-console-3.6.1-bin.zip
-RUN unzip apache-tinkerpop-gremlin-server-3.6.1-bin.zip
-RUN unzip apache-tinkerpop-gremlin-console-3.6.1-bin.zip
-RUN rm apache-tinkerpop-gremlin-server-3.6.1-bin.zip
-RUN rm apache-tinkerpop-gremlin-console-3.6.1-bin.zip
-
-RUN sed -i 's/gremlin.tinkergraph.vertexIdManager=LONG/gremlin.tinkergraph.vertexIdManager=ANY/g' /home/graph-user/graph_data/apache-tinkerpop-gremlin-server-3.6.1/conf/tinkergraph-empty.properties
-RUN sed -i 's/channelizer: org.apache.tinkerpop.gremlin.server.channel.WebSocketChannelizer/channelizer: org.apache.tinkerpop.gremlin.server.channel.WsAndHttpChannelizer/g' /home/graph-user/graph_data/apache-tinkerpop-gremlin-server-3.6.1/conf/gremlin-server.yaml
-RUN chmod +x /home/graph-user/graph_data/apache-tinkerpop-gremlin-server-3.6.1/bin/gremlin-server.sh
 
 EXPOSE 8182 
 
-#RUN CMD ["/home/graph-user/graph_data/apache-tinkerpop-gremlin-server-3.6.1/bin/gremlin-server.sh", “start”, “FOREGROUND”]
+
 
 #RUN curl "http://localhost:8182?gremlin={g=TinkerGraph.open().traversal()}"
 
@@ -69,6 +59,4 @@ EXPOSE 8182
 
 RUN git clone https://github.com/varkeyg/graphapp.git
 
-RUN echo "run gremlin server by running gremlin-server.sh start"
-RUN echo "run gremlin client by running gremlin.sh"
 
