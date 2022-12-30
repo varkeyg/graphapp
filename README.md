@@ -19,18 +19,19 @@ Then you can do `select * from holdings` to see the data
 The data contains stock holdings of major investment companies like Warren Buffet's Berkshire Hathaway at the end of each quarter. 
 for example:
 ```
-select holder_cik, holding_name, period_date, sym, sum(quantity) as number_of_shares
-  from holdings
- where holder_cik ='1067983'
-   and sym = 'AAPL'
- group by holder_cik, holding_name, period_date, sym
+select holder_name, holding_name, period_date, sum(quantity) as shares
+from holdings
+where holder_cik ='1067983'
+and sym = 'AAPL'
+group by holder_name, holding_name, period_date
 ```
-| holder_cik | holding_name | period_date | sym  | number_of_shares |
-|------------|--------------|-------------|------|------------------|
-| 1067983    | APPLE INC    | 20211231    | AAPL | 887135554        |
-| 1067983    | APPLE INC    | 20220331    | AAPL | 890923410        |
-| 1067983    | APPLE INC    | 20220630    | AAPL | 894802319        |
-| 1067983    | APPLE INC    | 20220930    | AAPL | 894802319        |
+| holder\_name           | holding\_name | period\_date | shares    |
+|:-----------------------|:--------------|:-------------|:----------|
+| BERKSHIRE HATHAWAY INC | APPLE INC     | 20211231     | 887135554 |
+| BERKSHIRE HATHAWAY INC | APPLE INC     | 20220331     | 890923410 |
+| BERKSHIRE HATHAWAY INC | APPLE INC     | 20220630     | 894802319 |
+| BERKSHIRE HATHAWAY INC | APPLE INC     | 20220930     | 894802319 |
+
 
 One way to model this data as a graph is to create vertices for `holders` and `holdings` and connect them via `edges` for each `period`. Graph models need a unique identifier for a vertex called `id`. usually denoted as `~id` and a label to define the type of vertex. Here we can use `holder_cik` -> Holder's company identifier key defined by securities exchange commission (SEC). Holdings can be identified by sym (symbol). However, some stock holdings does not have symbols. Alternatively we can use CUSIP for the same purpose. Cusip is an alternate identifier. 
 
