@@ -1,15 +1,20 @@
 
 # Build the image. Make sure to run in the directory where the Dockerfile file is available
-sudo docker build -t graph_app_image .
+docker build -t graph_app_image .
 
 # Remove the container if it already exists
-sudo docker rm /graph_app_container
+docker stop graph_app_container
+docker rm /graph_app_container
 
 # Create a volume for data on the parent host
-sudo docker volume create graphapp
+docker volume create graph_data
 
 
 
 # Run the container & Mount the volumes
-sudo docker run --name dev_container \
---mount source=graphapp,target=/home/graph-user/graphapp -it graph_app_image
+docker run --name graph_app_container --expose 8182 \
+--mount source=graph_data,target=/home/graph-user/graph_data -p 8182:8182 -t -d graph_app_image
+
+docker exec graph_app_container gremlin-server.sh start
+
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' graph_app_container
