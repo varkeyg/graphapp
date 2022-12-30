@@ -27,7 +27,6 @@ RUN apt-get install -y zip
 RUN apt-get install -y vim
 RUN apt-get install -y sqlite3
 RUN apt-get install -y bash-completion
-RUN apt-get install -y openjdk-18-jdk
 RUN apt-get install -y jq
 
 RUN useradd -m graph-user
@@ -36,12 +35,12 @@ RUN usermod -aG sudo graph-user
 USER graph-user
 CMD ["/bin/bash"]
 
-ENV PATH=$PATH:~/java/jdk-15.0.2/bin
+ENV PATH=$PATH:~/java/openlogic-openjdk-11.0.17+8-linux-x64/bin
 COPY java.sh .
 
 RUN ./java.sh
 
-ENV PATH=$PATH:~/tpop/pache-tinkerpop-gremlin-server-3.6.1/bin:~/tpop/apache-tinkerpop-gremlin-console-3.6.1/bin
+ENV PATH=$PATH:~/tpop/apache-tinkerpop-gremlin-server-3.6.1/bin:~/tpop/apache-tinkerpop-gremlin-console-3.6.1/bin
 COPY tpop.sh .
 RUN ./tpop.sh
 
@@ -56,7 +55,8 @@ EXPOSE 8182
 # curl "http://localhost:8182?gremlin={g.addV('person').property('name','Geo')}"
 #RUN curl "http://172.17.0.2:8182?g.V().count()"
 
+WORKDIR /home/graph-user
 
-RUN git clone https://github.com/varkeyg/graphapp.git
+RUN git clone https://github.com/varkeyg/graphapp.git 
 
 
