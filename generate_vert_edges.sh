@@ -24,4 +24,4 @@ select distinct holder_cik ||cusip || '-'|| period_date as '~id',
        date_filed
   from holdings;" > edges.csv
 
-  python csv-gremlin.py holder_vertices.csv > holder_vertices.gremlin
+  python3 csv-gremlin.py holder_vertices.csv > holder_vertices.gremlin
