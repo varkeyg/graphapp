@@ -51,14 +51,14 @@ sqlite3 -header -csv holdings.db  "select distinct holder_cik as '~id','Holder'a
 Holdings vertices (for simplicity, lets create a vertex for each holding period. This can be further modelled more elegantly)
 ```
 sqlite3 -header -csv holdings.db  "
-select cusip || '-'|| period_date  as '~id',
+select distinct cusip || '-'|| period_date  as '~id',
        'Holding' as label,
        sym,
-       cusip,
        holding_name,
        sec_type,
        substr(period_date,1,4)||'-'||substr(period_date,5,2)||'-'||substr(period_date,7,2) as 'period_date:Date',
-       sum(cast (market_value as decimal)) as market_value, sum(cast (quantity as integer)) as 'quantity:Int'
+       sum(cast (market_value as decimal)) as 'market_value:Double',
+       sum(cast (quantity as integer)) as 'quantity:Int'
   from holdings
   where sym in ('AAPL', 'CAT')
 group by sym, cusip, holding_name, period_date
@@ -67,17 +67,16 @@ order by sym desc;" > holding_vertices.csv
 
 Here we have defined holdings vertices with a few properties and data types
 
-| \~id               | label   | sym  | holding\_name   | sec\_type | period\_date:Date | market\_value | quantity:Int |
-|:-------------------|:--------|:-----|:----------------|:----------|:------------------|:--------------|:-------------|
-| 149123101-20211231 | Holding | CAT  | CATERPILLAR INC | COM       | 2021-12-31        | 8499373000    | 41111408     |
-| 149123101-20220331 | Holding | CAT  | CATERPILLAR INC | COM       | 2022-03-31        | 9131971000    | 40983625     |
-| 149123101-20220630 | Holding | CAT  | CATERPILLAR INC | COM       | 2022-06-30        | 7152932000    | 40014164     |
-| 149123101-20220930 | Holding | CAT  | CATERPILLAR INC | COM       | 2022-09-30        | 6592882000    | 40180899     |
-| 037833100-20211231 | Holding | AAPL | APPLE INC       | COM       | 2021-12-31        | 270426188000  | 1522927235   |
-| 037833100-20220331 | Holding | AAPL | APPLE INC       | COM       | 2022-03-31        | 263537489000  | 1509292061   |
-| 037833100-20220630 | Holding | AAPL | APPLE INC       | COM       | 2022-06-30        | 204979018000  | 1499261395   |
-| 037833100-20220930 | Holding | AAPL | APPLE INC       | COM       | 2022-09-30        | 205621196000  | 1487852369   |
-
+| \~id               | label   | sym  | holding\_name   | sec\_type | period\_date:Date | market\_value:Double | quantity:Int |
+|:-------------------|:--------|:-----|:----------------|:----------|:------------------|:---------------------|:-------------|
+| 149123101-20211231 | Holding | CAT  | CATERPILLAR INC | COM       | 2021-12-31        | 8499373000           | 41111408     |
+| 149123101-20220331 | Holding | CAT  | CATERPILLAR INC | COM       | 2022-03-31        | 9131971000           | 40983625     |
+| 149123101-20220630 | Holding | CAT  | CATERPILLAR INC | COM       | 2022-06-30        | 7152932000           | 40014164     |
+| 149123101-20220930 | Holding | CAT  | CATERPILLAR INC | COM       | 2022-09-30        | 6592882000           | 40180899     |
+| 037833100-20211231 | Holding | AAPL | APPLE INC       | COM       | 2021-12-31        | 270426188000         | 1522927235   |
+| 037833100-20220331 | Holding | AAPL | APPLE INC       | COM       | 2022-03-31        | 263537489000         | 1509292061   |
+| 037833100-20220630 | Holding | AAPL | APPLE INC       | COM       | 2022-06-30        | 204979018000         | 1499261395   |
+| 037833100-20220930 | Holding | AAPL | APPLE INC       | COM       | 2022-09-30        | 205621196000         | 1487852369   |
 
 Edges between holder and holdings
 ```
