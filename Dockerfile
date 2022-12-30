@@ -29,6 +29,8 @@ RUN apt-get install -y sqlite3
 RUN apt-get install -y bash-completion
 RUN apt-get install -y jq
 
+RUN pip3 install python-dateutil
+
 RUN useradd -m graph-user
 RUN usermod -aG sudo graph-user
 
