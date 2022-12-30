@@ -102,3 +102,9 @@ select distinct holder_cik ||cusip || '-'|| period_date as '~id',
 ### Converting the csv data to Gremlin format
 Kelvin has provided a nice [utility](https://github.com/awslabs/amazon-neptune-tools/tree/master/csv-gremlin) to convert the data. The docker container downloads it also. 
 
+
+```
+
+
+
+```
