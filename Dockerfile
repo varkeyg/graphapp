@@ -58,5 +58,6 @@ EXPOSE 8182
 WORKDIR /home/graph-user
 
 RUN git clone https://github.com/varkeyg/graphapp.git 
+RUN git clone https://github.com/awslabs/amazon-neptune-tools.git
 
 

@@ -1,0 +1,4 @@
+graph = TinkerGraph.open()
+g = graph.traversal()
+g.V().count()
+
