@@ -67,16 +67,16 @@ order by sym desc;" > holding_vertices.csv
 
 Here we have defined holdings vertices with a few properties and data types
 
-| \~id               | label   | sym  | cusip     | holding\_name   | sec\_type | period\_date:Date | market\_value | quantity:Int |
-|:-------------------|:--------|:-----|:----------|:----------------|:----------|:------------------|:--------------|:-------------|
-| 149123101-20211231 | Holding | CAT  | 149123101 | CATERPILLAR INC | COM       | 2021-12-31        | 8499373000    | 41111408     |
-| 149123101-20220331 | Holding | CAT  | 149123101 | CATERPILLAR INC | COM       | 2022-03-31        | 9131971000    | 40983625     |
-| 149123101-20220630 | Holding | CAT  | 149123101 | CATERPILLAR INC | COM       | 2022-06-30        | 7152932000    | 40014164     |
-| 149123101-20220930 | Holding | CAT  | 149123101 | CATERPILLAR INC | COM       | 2022-09-30        | 6592882000    | 40180899     |
-| 037833100-20211231 | Holding | AAPL | 037833100 | APPLE INC       | COM       | 2021-12-31        | 270426188000  | 1522927235   |
-| 037833100-20220331 | Holding | AAPL | 037833100 | APPLE INC       | COM       | 2022-03-31        | 263537489000  | 1509292061   |
-| 037833100-20220630 | Holding | AAPL | 037833100 | APPLE INC       | COM       | 2022-06-30        | 204979018000  | 1499261395   |
-| 037833100-20220930 | Holding | AAPL | 037833100 | APPLE INC       | COM       | 2022-09-30        | 205621196000  | 1487852369   |
+| \~id               | label   | sym  | holding\_name   | sec\_type | period\_date:Date | market\_value | quantity:Int |
+|:-------------------|:--------|:-----|:----------------|:----------|:------------------|:--------------|:-------------|
+| 149123101-20211231 | Holding | CAT  | CATERPILLAR INC | COM       | 2021-12-31        | 8499373000    | 41111408     |
+| 149123101-20220331 | Holding | CAT  | CATERPILLAR INC | COM       | 2022-03-31        | 9131971000    | 40983625     |
+| 149123101-20220630 | Holding | CAT  | CATERPILLAR INC | COM       | 2022-06-30        | 7152932000    | 40014164     |
+| 149123101-20220930 | Holding | CAT  | CATERPILLAR INC | COM       | 2022-09-30        | 6592882000    | 40180899     |
+| 037833100-20211231 | Holding | AAPL | APPLE INC       | COM       | 2021-12-31        | 270426188000  | 1522927235   |
+| 037833100-20220331 | Holding | AAPL | APPLE INC       | COM       | 2022-03-31        | 263537489000  | 1509292061   |
+| 037833100-20220630 | Holding | AAPL | APPLE INC       | COM       | 2022-06-30        | 204979018000  | 1499261395   |
+| 037833100-20220930 | Holding | AAPL | APPLE INC       | COM       | 2022-09-30        | 205621196000  | 1487852369   |
 
 
 Edges between holder and holdings
