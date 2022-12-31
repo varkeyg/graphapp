@@ -30,11 +30,5 @@ python3 /home/graph-user/amazon-neptune-tools/csv-gremlin/csv-gremlin.py edges.c
 
 
 
-echo "graph = TinkerGraph.open()" > script.gremlin
-echo "g = graph.traversal()" >> script.gremlin
-
-cat /home/graph-user/graphapp/resources/holder_vertices.gremlin >> script.gremlin
-cat /home/graph-user/graphapp/resources/holding_vertices.gremlin >> script.gremlin
-cat /home/graph-user/graphapp/resources/edges.gremlin >> script.gremlin
 
 
