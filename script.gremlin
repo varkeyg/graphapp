@@ -2,6 +2,6 @@ graph = TinkerGraph.open()
 g = graph.traversal()
 
 :load /home/graph-user/graphapp/resources/holder_vertices.gremlin
-:load /home/graph-user/graphapp/resources/holding_vertices.gremlin >> script.gremlin
-:load /home/graph-user/graphapp/resources/edges.gremlin >> script.gremlin
+:load /home/graph-user/graphapp/resources/holding_vertices.gremlin
+:load /home/graph-user/graphapp/resources/edges.gremlin
 g.V().count()
