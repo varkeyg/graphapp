@@ -12,7 +12,6 @@ select distinct cusip || '-'|| period_date  as '~id',
        sum(cast (market_value as decimal)) as 'market_value:Double',
        sum(cast (quantity as integer)) as 'quantity:Long'
   from holdings
-  where sym in ('AAPL', 'CAT')
 group by sym, cusip, holding_name, period_date
 order by sym desc;" > holding_vertices.csv
 
