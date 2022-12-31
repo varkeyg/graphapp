@@ -106,3 +106,14 @@ Kelvin has provided a nice [utility](https://github.com/awslabs/amazon-neptune-t
 
 You can convert the csv files into gremlin statements by running:`generate_vert_edges.sh`
 
+### Loading data into graph.
+
+- start the gremlin console `gremlin.sh`
+
+```
+
+gremlin> graph = TinkerGraph.open()
+gremlin> g = graph.traversal()
+
+
+```
