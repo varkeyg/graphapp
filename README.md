@@ -1,4 +1,18 @@
 
+### TL;DR;
+This creates a simple graph application using filings data from Securities Exchange Commission (SEC). It has investors and their holdings for a few quarters. 
+
+To use:
+1. Install docker
+2. clone this repository. `git clone git@github.com:varkeyg/graphapp.git`
+3. `cd graphapp`
+4. run `./docker_run.sh` -- this will create a container, start it and log you into it.
+5. Generate graph data from raw data. Run `generate_vert_edges.sh`
+6. Start gremlin console. Run `gremlin.sh`
+7. create the graph and load data into it. run this on gremlin console `:load /home/graph-user/graphapp/script.gremlin`
+8. Run queries. 
+
+
 ### Graph Server setup
 
 - Install [docker](https://docs.docker.com/engine/install/ubuntu/)
@@ -104,16 +118,14 @@ select distinct holder_cik ||cusip || '-'|| period_date as '~id',
 ### Converting the csv data to Gremlin format
 Kelvin has provided a nice [utility](https://github.com/awslabs/amazon-neptune-tools/tree/master/csv-gremlin) to convert the data. The docker container downloads it also. 
 
-You can convert the csv files into gremlin statements by running:`generate_vert_edges.sh`
+You can convert the csv files into gremlin statements by running:`generate_vert_edges.sh`. This generates a `scripts.gremlin` file. 
 
 ### Loading data into graph.
-
 - start the gremlin console `gremlin.sh`
 
 ```
-
-gremlin> graph = TinkerGraph.open()
-gremlin> g = graph.traversal()
-
+:load /home/graph-user/graphapp/script.gremlin
 
 ```
+At this point, graph is ready for queries. 
+
