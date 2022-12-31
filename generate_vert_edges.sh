@@ -7,7 +7,7 @@ select distinct cusip || '-'|| period_date  as '~id',
        'Holding' as '~label',
        sym,
        holding_name,
-       sec_type,
+       replace(sec_type,'$',' ') as sec_type,
        substr(period_date,1,4)||'-'||substr(period_date,5,2)||'-'||substr(period_date,7,2) as 'period_date:Date',
        sum(cast (market_value as decimal)) as 'market_value:Double',
        sum(cast (quantity as integer)) as 'quantity:Long'
