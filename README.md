@@ -12,6 +12,13 @@ To use:
 7. create the graph and load data into it. run this on gremlin console `:load /home/graph-user/graphapp/script.gremlin`
 8. Run queries. 
 
+For example: What were the holdings on Berkshire Hathaway at end of 09/30/2022?
+```
+g.V('1067983').as('holder_name').outE().
+  inV().has('period_date',datetime('2022-09-30T00:00:00')).
+  as('sym').select('holder_name','sym').by('holder_name').by('sym');
+```
+
 
 ### Graph Server setup
 
