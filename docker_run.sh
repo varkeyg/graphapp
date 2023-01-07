@@ -13,7 +13,7 @@ docker volume create graph_data
 
 # Run the container & Mount the volumes
 docker run --name graph_app_container --expose 8182 \
---mount source=graph_data,target=/home/graph-user/graph_data -p 8182:8182 -t -d graph_app_image
+--mount source=graph_data,target=/home/graph-user/graph_data -p 8182:8182 -p 8888:8888 -t -d graph_app_image
 
 docker exec graph_app_container /home/graph-user/tpop/apache-tinkerpop-gremlin-server-3.6.1/bin/gremlin-server.sh start
 

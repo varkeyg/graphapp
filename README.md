@@ -117,3 +117,6 @@ gremlin> g = graph.traversal()
 
 
 ```
+
+### if you are running the docker container remotely.
+ssh -L 8888:localhost:8888 gvarkey@xps
