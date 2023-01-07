@@ -6,8 +6,35 @@ To use:
 1. Install docker
 2. clone this repository. `git clone git@github.com:varkeyg/graphapp.git`
 3. `cd graphapp`
-4. run `./docker_run.sh` -- this will create a container, start it and log you into it.
-5. Generate graph data from raw data. Run `generate_vert_edges.sh`
+4. run `./docker_run.sh` -- this will create a container, start it and log you into it. Note: You can use the AWS graph notebook(https://github.com/aws/graph-notebook). The console will give you a URL for the notebook. If you are running this on a remote host like EC2, make sure to replace the localhost with IP address. You would need to run 2 commands detailed in AWS graph notebook documentation. 
+
+Load the magics
+```
+%load_ext graph_notebook.magics
+```
+Update the notebook config to point to the tinkerpop server started in the background. 
+```
+%%graph_notebook_config
+{
+  "host": "localhost",
+  "port": 8182,
+  "ssl": false,
+  "gremlin": {
+    "traversal_source": "g",
+    "username": "",
+    "password": "",
+    "message_serializer": "graphsonv3"
+  }
+}
+```
+Now you can run queries. (Note. we have an empty graph now. please add/load some data)
+```
+%%gremlin
+g.V().count()
+```
+
+
+5. Generate graph data from raw data. Run `generate_vert_edges.sh` by opening a shell
 6. Start gremlin console. Run `gremlin.sh`
 7. create the graph and load data into it. run this on gremlin console `:load /home/graph-user/graphapp/script.gremlin`
 8. Run queries. 
