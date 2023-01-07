@@ -17,7 +17,14 @@ docker run --name graph_app_container --expose 8182 \
 
 docker exec graph_app_container /home/graph-user/tpop/apache-tinkerpop-gremlin-server-3.6.1/bin/gremlin-server.sh start
 
+
+
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' graph_app_container
+
+
+#docker exec graph_app_container  --ip 0.0.0.0 --no-browser #--notebooks-dir ~/notebook
+#docker run -it -p 8888:8888 graph_app_container
+docker exec graph_app_container python3 -m jupyterlab --ip 0.0.0.0 --no-browser &
 
 docker exec -it graph_app_container /bin/bash
 
