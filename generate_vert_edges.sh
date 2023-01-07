@@ -7,12 +7,11 @@ select distinct cusip || '-'|| period_date  as '~id',
        'Holding' as '~label',
        sym,
        holding_name,
-       sec_type,
+       replace(sec_type,'$',' ') as sec_type,
        substr(period_date,1,4)||'-'||substr(period_date,5,2)||'-'||substr(period_date,7,2) as 'period_date:Date',
        sum(cast (market_value as decimal)) as 'market_value:Double',
-       sum(cast (quantity as integer)) as 'quantity:Int'
+       sum(cast (quantity as integer)) as 'quantity:Long'
   from holdings
-  where sym in ('AAPL', 'CAT')
 group by sym, cusip, holding_name, period_date
 order by sym desc;" > holding_vertices.csv
 
@@ -30,11 +29,5 @@ python3 /home/graph-user/amazon-neptune-tools/csv-gremlin/csv-gremlin.py edges.c
 
 
 
-echo "graph = TinkerGraph.open()" > script.gremlin
-echo "g = graph.traversal()" >> script.gremlin
-
-cat /home/graph-user/graphapp/resources/holder_vertices.gremlin >> script.gremlin
-cat /home/graph-user/graphapp/resources/holding_vertices.gremlin >> script.gremlin
-cat /home/graph-user/graphapp/resources/edges.gremlin >> script.gremlin
 
 
