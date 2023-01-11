@@ -30,7 +30,7 @@ RUN apt-get install -y vim
 RUN apt-get install -y sqlite3
 RUN apt-get install -y bash-completion
 RUN apt-get install -y jq
-
+RUN apt-get install -y zsh
 
 
 
