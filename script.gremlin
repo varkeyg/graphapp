@@ -1,5 +1,6 @@
-graph = TinkerGraph.open()
-g = graph.traversal()
+​​:remote connect tinkerpop.server conf/remote.yaml
+:remote console
+
 
 :load /home/graph-user/graphapp/resources/holder_vertices.gremlin
 :load /home/graph-user/graphapp/resources/holding_vertices.gremlin

@@ -50,11 +50,11 @@ COPY java.sh .
 
 RUN ./java.sh
 
-ENV PATH=$PATH:~/tpop/apache-tinkerpop-gremlin-server-3.6.1/bin:~/tpop/apache-tinkerpop-gremlin-console-3.6.1/bin
+ENV PATH=$PATH:/home/graph-user/tpop/apache-tinkerpop-gremlin-server-3.6.1/bin:/home/graph-user/tpop/apache-tinkerpop-gremlin-console-3.6.1/bin
 COPY tpop.sh .
 RUN ./tpop.sh
 
-
+ENV PATH=$PATH:/home/graph-user/.local/bin
 
 WORKDIR /home/graph-user
 
