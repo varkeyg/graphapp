@@ -77,3 +77,5 @@ RUN pip3 install graph-notebook
 RUN pip3 install jupyter -U && pip3 install jupyterlab
 EXPOSE 8888
 #ENTRYPOINT ["python3 -m" "jupyter", "lab","--ip=0.0.0.0","--allow-root"] 
+COPY set_shell.sh .
+RUN ./set_shell.sh

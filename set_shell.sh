@@ -1,0 +1,1 @@
+echo "zsh" >> /home/graph-user/.bashrc
