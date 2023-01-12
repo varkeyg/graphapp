@@ -1,4 +1,4 @@
-:remote connect tinkerpop.server conf/remote.yaml
+:remote connect tinkerpop.server /home/graph-user/tpop/apache-tinkerpop-gremlin-console-3.6.1/conf/remote.yaml
 :remote console
 
 
